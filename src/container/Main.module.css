@@ -1,0 +1,33 @@
+.Util {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.Slider {
+    position: relative;
+    height: 350px;
+    width: 350px;
+    margin: 0 auto;
+}
+
+.Slide {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.ImgCont {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.Carrousel__slide {    
+    display: none;
+    height: 100%;    
+}
+
+.Carrousel__slide__active {    
+    display: block;    
+}

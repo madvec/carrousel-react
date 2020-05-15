@@ -1,0 +1,14 @@
+.Arrow {
+    cursor: pointer;
+    position: absolute;
+    top:50%;
+    transform: translate(-50%,-50%)
+}
+
+.Right {
+    right: -50px;
+}
+
+.Left {
+    left: -30px;
+}
