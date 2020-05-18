@@ -1,0 +1,109 @@
+.First-appear-active, .First-appear-done,
+.Next-enter, .Next-enter-active, .Next-enter-done, .Next-exit, .Next-exit-active, .Next-exit-done,
+.Prev-enter, .Prev-enter-active, .Prev-enter-done, .Prev-exit, .Prev-exit-active, .Prev-exit-done
+{
+    z-index: 1;
+}
+
+/* First loading */
+
+.First-appear-active {
+    opacity: 0;
+}
+
+.First-appear-done {
+    opacity: 1;
+    transition: opacity 255ms linear;
+}
+
+/* Next Animations */
+
+.Next-enter {
+    transform: translateX(100%);
+}
+
+.Next-enter-active {
+    transform: translateX(0);
+    transition: all 355ms linear;
+    transition-delay: 500ms;
+}
+
+.Next-enter-done {
+    transform: translateX(0);
+}
+
+.Next-exit {
+    transform: translateX(0);
+}
+
+.Next-exit-active {
+    transform: translateX(-100%);
+    transition: all 355ms linear;
+    transition-delay: 500ms;
+}
+
+.Next-exit-done {
+    transform: translateX(-100%);
+}
+
+/* Prev Animations */
+
+.Prev-enter {
+    transform: translateX(-100%);
+}
+
+.Prev-enter-active {
+    transform: translateX(0);
+    transition: all 355ms linear;
+    transition-delay: 500ms;
+}
+
+.Prev-enter-done {
+    transform: translateX(0);
+}
+
+.Prev-exit {
+    transform: translateX(0);
+}
+
+.Prev-exit-active {
+    transform: translateX(100%);
+    transition: all 355ms linear;
+    transition-delay: 500ms;
+}
+
+.Prev-exit-done {
+    transform: translateX(100%);
+}
+
+/* Text Animation  */
+
+.text {
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.Next-exit .text,
+.Prev-exit .text {
+    bottom:0;
+}
+
+.Next-exit-active .text,
+.Prev-exit-active .text {
+    bottom:-100%;
+    transition: all 1000ms linear;       
+}
+
+.Next-enter .text,
+.Prev-enter .text {
+    bottom:-100%;
+}
+
+.Next-enter-active .text,
+.Prev-enter-active .text {
+    bottom: 0;
+    transition:all 555ms linear;
+    transition-delay: 455ms; 
+}

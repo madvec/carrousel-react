@@ -1,6 +1,7 @@
 .Util {
     height: 100%;
     position: relative;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -13,8 +14,9 @@
 
 .Slide {
     height: 100%;
-    position: absolute;    
+    position: absolute;
     width: 100%;
+    z-index: -1;    
 }
 
 .ImgCont {
@@ -23,27 +25,22 @@
     width: 100%;
 }
 
-.Carrousel__slide {    
-    display: none;
-    height: 100%;    
-}
-
-.Carrousel__slide__active {    
-    display: block;    
+.Carrousel__slide {
+    height: 100%;
+    transition: all 355ms linear;
 }
 
 @media(min-width:480px) {
-    .Slider {                
+    .Slider {
         height: 350px;
     }
 }
 
-
 @media(min-width:767px) {
-    .Slider {        
+    .Slider {
         position: relative;
         height: 450px;
         width: 650px;
         margin: 0 auto;
-    }    
+    }
 }

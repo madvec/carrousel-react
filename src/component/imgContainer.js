@@ -1,8 +1,9 @@
 import React from 'react'
 
-
 const imgContainer = (props) => {
-    const background = `url(${props.src})`;        
+
+    const background = `url(${props.src})`;
+
     return (
         <div style={{
             backgroundImage: background,

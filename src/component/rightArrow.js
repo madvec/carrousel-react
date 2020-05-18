@@ -5,13 +5,12 @@ import style from './Main.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
-
 const rightArrow = (props) => {
     let classes = [style.Arrow, style.Right].join(' ')
     return (
-        <div className={classes} onClick={props.nextHandler}>
+        <button className={classes} onClick={props.nextHandler} disabled={props.disable}>
             <FontAwesomeIcon icon={faArrowRight} />
-        </div>
+        </button>
     )
 }
 

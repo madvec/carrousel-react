@@ -31,29 +31,54 @@ class UtilCarrousel extends Component {
 
     state = {
         activeSlide: 0,
-        length: Object.keys(images).length
+        oldSlide: null,
+        direction: "first",
+        length: Object.keys(images).length,
+        loading: true,
+        disableClick: false
+    }
+
+    componentDidMount = () => {
+
+        Object.values(images).map((name) => {
+
+            const imageLoader = new Image();
+            imageLoader.src = name.src
+
+            imageLoader.onload = (resp) => this.setState({ loading: false })
+
+            return this.state.loading
+
+        })
+
     }
 
     prevImageHandler = () => {
         const prevSlide = this.state.activeSlide - 1
+        const oldSlide = this.state.activeSlide
+        prevSlide < 0
+            ? this.setState({ activeSlide: this.state.length - 1, oldSlide: oldSlide, direction: 'prev', disableClick: true })
+            : this.setState({ activeSlide: prevSlide, oldSlide: oldSlide, direction: 'prev', disableClick: true })
 
-        if (prevSlide < 0) {
-            this.setState({ activeSlide: this.state.length - 1 })
-        } else {
-            this.setState({ activeSlide: prevSlide })
-        }
-
+        setTimeout(() => {
+            this.setState({disableClick: false})
+        }, 1050)
     }
 
     nextImageHandler = () => {
         const nextSlide = this.state.activeSlide + 1
+        const oldSlide = this.state.activeSlide
 
         if (nextSlide >= this.state.length) {
-            this.setState({ activeSlide: 0 })
+            this.setState({ activeSlide: 0, oldSlide: oldSlide, direction: 'next', disableClick: true })
         }
         else {
-            this.setState({ activeSlide: nextSlide })
+            this.setState({ activeSlide: nextSlide, oldSlide: oldSlide, direction: 'next', disableClick: true })
         }
+
+        setTimeout(() => {
+            this.setState({disableClick: false})
+        }, 1050)
     }
 
     render() {
@@ -63,17 +88,20 @@ class UtilCarrousel extends Component {
                     <Slide
                         key={igKey}
                         index={index}
-                        active={this.state.activeSlide}
+                        activeSlide={this.state.activeSlide}
+                        oldslide={this.state.oldSlide}
+                        direction={this.state.direction}
                         name={images[igKey].name}
                         alt={images[igKey].alt}
                         text={images[igKey].text}
+                        loading={this.state.loading}
                         src={images[igKey].src} />
                 )
             })
         return (
             <div className={styles.Slider}>
-                <RightArrow nextHandler={this.nextImageHandler} />
-                <LeftArrow prevHandler={this.prevImageHandler} />
+                <RightArrow nextHandler={this.nextImageHandler} disable={this.state.loading || this.state.disableClick} />
+                <LeftArrow prevHandler={this.prevImageHandler} disable={this.state.loading || this.state.disableClick} />
                 <div className={styles.Util}>
                     {slide}
                 </div>

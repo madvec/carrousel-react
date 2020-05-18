@@ -8,9 +8,9 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 const leftArrow = (props) => {
     let classes = [style.Arrow, style.Left].join(' ')
     return (
-        <div className={classes} onClick={props.prevHandler}>
+        <button className={classes} onClick={props.prevHandler} disabled={props.disable}>
             <FontAwesomeIcon icon={faArrowLeft} />
-        </div>
+        </button>
     )
 }
 
