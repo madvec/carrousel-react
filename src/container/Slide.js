@@ -15,8 +15,8 @@ class Slide extends Component {
         let show = this.props.activeSlide === this.props.index;
         let transitionName;
 
-                    
-        if(this.props.direction === "next") {
+
+        if (this.props.direction === "next") {
             transitionName = "Next"
         }
         else if (this.props.direction === "prev") {
@@ -34,7 +34,7 @@ class Slide extends Component {
             <Aux>
                 <CSSTransition
                     in={show}
-                    timeout={{ appear: 555, exit: 1000, enter:1000 }}
+                    timeout={{ appear: 555, exit: 1000, enter: 1000 }}
                     classNames={transitionName}
                     appear
                     exit
@@ -48,14 +48,14 @@ class Slide extends Component {
                                 <div className="text">
                                     <p>{this.props.text}</p>
                                 </div>
-                                : <div></div>
-                            }
+                                : <div></div>}
                         </div>
                     </div>
-                </CSSTransition>               
+                </CSSTransition>
             </Aux>
         )
     }
 }
+
 
 export default Slide

@@ -5,9 +5,16 @@
     width: 100%;
 }
 
+.SliderWrapper {
+    position: relative;
+    height: 85%;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .Slider {
     position: relative;
-    height: 150px;
+    height: 300px;
     max-width: 80%;
     margin: 0 auto;
 }
@@ -30,6 +37,34 @@
     transition: all 355ms linear;
 }
 
+.ImagesList ul {
+    font-size: calc(6px + 2vmin);
+    padding: 0;
+    list-style: none;
+}
+
+.ImagesList li {
+    border:1px solid #ccc;
+    background-color: #fff;
+    color:#333;
+    display: flex;
+    text-align: left;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.ImagesList p {
+    margin: 0;
+    width: 85%;
+}
+
+.ImagesList span {
+    text-align: center;
+    width: 15%
+}
+
+
 @media(min-width:480px) {
     .Slider {
         height: 350px;
@@ -42,5 +77,5 @@
         height: 450px;
         width: 650px;
         margin: 0 auto;
-    }
+    }    
 }
