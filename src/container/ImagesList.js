@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import styles from './Main.module.css'
+import * as ActionTypes from '../store/actions/actions'
 
 class ImagesList extends Component {
         
@@ -27,7 +28,7 @@ const mapStateToProps = (state) => {
 
 const dispatchStateToProps = dispatch => {
     return {
-        deleteImageActionHandler: (idName) => dispatch({ type: "DELETE_IMAGE", imgKey: idName })
+        deleteImageActionHandler: (idName) => dispatch({ type: ActionTypes.DELETE_IMAGE, imgKey: idName })
     }
 }
 

@@ -3,62 +3,30 @@ import Slide from './Slide'
 import RightArrow from '../component/rightArrow'
 import LeftArrow from '../component/leftArrow'
 import Dots from '../component/dots'
+import Loader from '../component/UI/Loader/Loader'
 import styles from './Main.module.css'
+import * as actionCreators from '../store/actions/actions'
 
 import { connect } from 'react-redux'
-
-const images = {
-    image1: {
-        name: 'Image Name 1',
-        alt: 'Alt Name',
-        src: 'https://cdn.pixabay.com/photo/2020/04/17/14/16/mountains-5055387_960_720.jpg',
-        text: 'Lorem Ipsum 1'
-    },
-    image2: {
-        name: 'Image Name 2',
-        alt: 'Alt Name',
-        src: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg',
-        text: 'Lorem Ipsum 2'
-
-    },
-    image3: {
-        name: 'Image Name 3',
-        alt: 'Alt Name',
-        src: 'https://cdn.pixabay.com/photo/2015/07/09/22/45/tree-838667_960_720.jpg',
-        text: 'Lorem Ipsum 3'
-    }
-}
-
 
 class UtilCarrousel extends Component {
 
     state = {
-        activeSlide: 0,        
+        activeSlide: 0,
         direction: "first",
         length: 0,
-        loading: true,
         disableClick: false,
         imagesToDisplay: []
     }
 
     componentDidMount = () => {
-        
-        Object.values(this.props.imgs).map((name) => {
 
-            const imageLoader = new Image();
-
-            imageLoader.src = name.src
-
-            imageLoader.onload = (resp) => this.setState({ loading: false, length: Object.keys(this.props.imgs).length })
-
-            return this.state.loading
-
-        })
+        this.props.setImages()
 
     }
 
     componentDidUpdate = () => {
-        
+
     }
 
     disableHandler() {
@@ -97,22 +65,28 @@ class UtilCarrousel extends Component {
 
     }
 
-    render() {            
-        const slide = Object.keys(this.props.imgs)
-            .map((igKey, index) => {
-                return (
-                    <Slide
-                        key={igKey}
-                        index={index}
-                        activeSlide={this.state.activeSlide}
-                        direction={this.state.direction}
-                        name={this.props.imgs[igKey].name}
-                        alt={this.props.imgs[igKey].alt}
-                        text={this.props.imgs[igKey].text}
-                        loading={this.state.loading}
-                        src={this.props.imgs[igKey].src} />
-                )
-            })
+    render() {
+        let slide = <Loader />
+
+        if (!this.props.loading) {
+            slide = Object.keys(this.props.imgs)
+                .map((igKey, index) => {
+                    return (
+                        <Slide
+                            key={igKey}
+                            index={index}
+                            activeSlide={this.state.activeSlide}
+                            direction={this.state.direction}
+                            name={this.props.imgs[igKey].name}
+                            alt={this.props.imgs[igKey].alt}
+                            text={this.props.imgs[igKey].text}
+                            loading={this.props.loading}
+                            src={this.props.imgs[igKey].src} />
+                    )
+                })
+        }
+
+
         const dots = Object.keys(this.props.imgs)
             .map((igKey, index) => {
                 return <Dots key={igKey} activeSlide={this.state.activeSlide} index={index} clicked={() => this.dotHandler(index)} />
@@ -120,13 +94,17 @@ class UtilCarrousel extends Component {
         return (
             <div className={styles.Slider}>
                 <div className={styles.SliderWrapper}>
-                    <RightArrow nextHandler={this.nextImageHandler} disable={this.state.loading || this.state.disableClick} />
-                    <LeftArrow prevHandler={this.prevImageHandler} disable={this.state.loading || this.state.disableClick} />
+                    <RightArrow nextHandler={this.nextImageHandler} disable={this.props.loading || this.state.disableClick} />
+                    <LeftArrow prevHandler={this.prevImageHandler} disable={this.props.loading || this.state.disableClick} />
                     <div className={styles.Util}>
                         {slide}
                     </div>
                     <div className="dots">
-                        <ul style={{ listStyle: "none", display: "flex", justifyContent: "center", padding: "0" }}>
+                        <ul style={{
+                            listStyle: "none",
+                            display: "flex",
+                            justifyContent: "center",
+                            padding: "0"}}>
                             {dots}
                         </ul>
                     </div>
@@ -136,16 +114,18 @@ class UtilCarrousel extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
+
     return {
         imgs: state.images,
-        length: state.length
+        length: state.length,
+        loading: state.loading
     }
 }
 
 const dispatchStateToProps = dispatch => {
     return {
-
+        setImages: () => dispatch(actionCreators.set_images())
     }
 }
 

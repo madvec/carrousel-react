@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ImageContainer from '../component/imgContainer'
 import Aux from '../hoc/Auxiliar'
-import Loader from '../component/UI/Loader/Loader'
 import style from './Main.module.css'
 import './Transition.css'
 import CSSTransition from 'react-transition-group/CSSTransition';
@@ -10,8 +9,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 class Slide extends Component {
 
     render() {
-        let classes = [style.Carrousel__slide]
-        let imgContainer;
+        let classes = [style.Carrousel__slide]        
         let show = this.props.activeSlide === this.props.index;
         let transitionName;
 
@@ -25,10 +23,7 @@ class Slide extends Component {
         else {
             transitionName = "First"
         }
-
-        this.props.loading
-            ? imgContainer = <Loader />
-            : imgContainer = <ImageContainer text={this.props.text} src={this.props.src} />
+        
 
         return (
             <Aux>
@@ -42,7 +37,7 @@ class Slide extends Component {
                     <div className={style.Slide}>
                         <div className={classes}>
                             <div className={style.ImgCont}>
-                                {imgContainer}
+                                <ImageContainer text={this.props.text} src={this.props.src} />
                             </div>
                             {!this.props.loading ?
                                 <div className="text">
