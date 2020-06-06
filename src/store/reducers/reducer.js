@@ -4,7 +4,7 @@ import {FETCH_IMAGES} from '../actions/actions'
 const initialState = {
     images: {},
     activeslide: 0,
-    length: 3,
+    length: 5,
     loading: false,
     error: null
 };
